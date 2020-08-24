@@ -1,3 +1,11 @@
+# Integral calculator
+
+This project was done to make Udacity guys happi, like bois.
+
+
+
+---
+
 # CPPND: Capstone Hello World Repo
 
 This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213).
