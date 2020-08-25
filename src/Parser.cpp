@@ -17,7 +17,7 @@ Parser::Parser(std::ifstream filestream) {
         std::istringstream linestream(line);
         while (!linestream.eof()) {
             linestream >> term >> opr;
-            terms_.emplace_back(decompose_term(term));
+            terms_.emplace_back(decomposeTerm(term));
             // operators are single chars
             oprs_.push_back(opr[0]);
         }
@@ -25,7 +25,7 @@ Parser::Parser(std::ifstream filestream) {
 };
 
 Parser::Parser(std::string line) {
-    string line, term, opr;
+    string term, opr;
     
     terms_.empty();
     oprs_.empty();
@@ -33,20 +33,19 @@ Parser::Parser(std::string line) {
     std::istringstream linestream(line);
     while (!linestream.eof()) {
         linestream >> term >> opr;
-        terms_.emplace_back(decompose_term(term));
-        oprs_.push_back(opr);
+        terms_.emplace_back(decomposeTerm(term));
+        oprs_.push_back(opr[0]);
     }
 };
 
-Expression Parser::generateExpression() {
-    Expression expr(terms_, oprs_);
-    return expr;
+std::pair<vector<TERM>*, vector<char>*> Parser::getExpression() {
+    return std::make_pair(&terms_, &oprs_);
 }
 
-TERM decompose_term(string term) {
+TERM Parser::decomposeTerm(string term) {
     TERM result;
     result.coeff = std::stof(term); // will stop at the first char
-    string power = 1;
+    string power = "1";
     if(term.find("^") != string::npos)
         power = term.substr(term.find("^"), term.length() - 1);
     result.power = std::stof(power);

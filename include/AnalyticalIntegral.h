@@ -9,7 +9,7 @@ using std::to_string;
 
 class AnalyticalIntegral : public Integral<string> {
 public:
-    AnalyticalIntegral(Expression expr): Integral(expr) {};
+    AnalyticalIntegral(const vector<TERM>& terms, const vector<char>& oprs): Integral(terms, oprs) {};
     string calculate();
 private:
     string calculateSingleTerm(TERM* term);

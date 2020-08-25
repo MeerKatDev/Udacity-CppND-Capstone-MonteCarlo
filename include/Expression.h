@@ -2,7 +2,7 @@
 #define EXPRESSION_H
 
 #include "Constants.h"
-// #include <memory>
+#include <vector>
 
 class Expression {
 public:

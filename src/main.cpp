@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     string arg;
     bool boundaryFound = false;
     float upper = 0, lower = 0; // optional limits
-    Parser p;
+    Parser* p;
     std::cout << "Hello Udacity!" << "\n";
     
     // Check the number of parameters
@@ -68,21 +68,21 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    Expression e(p.generateExpression());
-    delete p;
+    std::pair<vector<TERM> *, vector<char> *> expr = p->getExpression();
+    
     std::string result;
     if(boundaryFound) {
         // boundaries were, so we want to calculate the definite integral
-        NumericalIntegral ni(e, upper, lower);
+        NumericalIntegral ni( *(expr.first), *(expr.second), upper, lower);
         float res = ni.calculate();
         result = std::to_string(res);
     } else {
         // no boundaries, so it has to be only analytical
-        AnalyticalIntegral ai(e);
+        AnalyticalIntegral ai(*(expr.first), *(expr.second));
         result = ai.calculate();
     }
 
-    std::cout << "The result of the integral is: " << result << "\n."
-
+    std::cout << "The result of the integral is: " << result << "\n.";
+    delete p;   
     return 0;
 }

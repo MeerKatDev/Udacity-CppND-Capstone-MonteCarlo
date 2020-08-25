@@ -3,15 +3,7 @@
 #include <iterator>
 #include <functional> 
 
-NumericalIntegral::NumericalIntegral(Expression expr, float upperBound, float lowerBound):
-    expression(expr),
-    upper_(upperBound),
-    lower_(lowerBound);
-{}
-
 float NumericalIntegral::calculate() {
-    char[] oprs = expression.getOperators();
-    TERM[] terms = expression.getTerms();
     // distinction between prev and result would be useful in case 
     // there were subexpressions
     float prev = 0;
@@ -20,14 +12,14 @@ float NumericalIntegral::calculate() {
     unsigned int opIdx = 0;
     vector<int>::iterator ptr;
 
-    for (ptr = terms.begin(); ptr < terms.end(); ptr++) {
-        current = calculateSingleTerm(ptr);
-        result = withSign(prev, current, opIdx);
+    for(TERM term : terms_) {
+        result += calculateSingleTerm(&term);
+        result += oprs_[opIdx];
         opIdx++;
     }
     
     return result;
-}
+};
 
 float NumericalIntegral::withSign(float a, float b, char c) {
     switch(c) {
@@ -39,17 +31,20 @@ float NumericalIntegral::withSign(float a, float b, char c) {
             return a * b;
         case '/':
             return a / b;
+        default:
+            return 0;
     }
-}
+};
 
 float NumericalIntegral::calculateSingleTerm(TERM* term) {
-    float pow =  term->power + 1;
-    float coeff = term->coeff / pow;
+    float power =  term->power + 1;
+    float coeff = term->coeff / power;
     if(term->term_type == FUNCTION::fx) {
-        return coeff * ((upper_ ** pow) - (lower_ ** pow));
+        return coeff * (pow(upper_, power) - pow(lower_, power));
     } else if(term->term_type == FUNCTION::fsin) {
-        return coeff * ((sin(upper_) ** pow) * (-cos(upper_)) - (sin(lower_) ** pow) * (-cos(lower_)));
+        return coeff * (pow(sin(upper_), power) * (-cos(upper_)) - pow(sin(lower_), power) * (-cos(lower_)));
     } else if(term->term_type == FUNCTION::fcos) {
-        return coeff * ((cos(upper_) ** pow) * (sin(upper_)) - (cos(lower_) ** pow) * (sin(lower_)));
-    }
-}
+        return coeff * (pow(cos(upper_), power) * (sin(upper_)) - (pow(cos(lower_), power) * (sin(lower_))));
+    } else 
+        return 0;
+};

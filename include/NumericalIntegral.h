@@ -5,7 +5,8 @@
 
 class NumericalIntegral : public Integral<float> {
 public:
-    NumericalIntegral(Expression expr, float upperBound, float lowerBound);
+    NumericalIntegral(const vector<TERM>& terms, const vector<char>& oprs, float upperBound, float lowerBound)
+        : upper_(upperBound), lower_(lowerBound), Integral(terms, oprs) {};
     float calculate();
 private:
     float withSign(float a, float b, char c);
