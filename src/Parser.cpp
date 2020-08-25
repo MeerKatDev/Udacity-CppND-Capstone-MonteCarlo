@@ -7,7 +7,7 @@
 // terms and operators separated by spaces
 // numbers before functions
 Parser::Parser(std::ifstream filestream) {
-    std::string line, term, opr;
+    string line, term, opr;
     
     terms_.empty();
     oprs_.empty();
@@ -25,7 +25,7 @@ Parser::Parser(std::ifstream filestream) {
 };
 
 Parser::Parser(std::string line) {
-    std::string line, term, opr;
+    string line, term, opr;
     
     terms_.empty();
     oprs_.empty();
@@ -43,20 +43,20 @@ Expression Parser::generateExpression() {
     return expr;
 }
 
-TERM decompose_term(std::string term) {
+TERM decompose_term(string term) {
     TERM result;
     result.coeff = std::stof(term); // will stop at the first char
-    std::string power = 1;
-    if(term.find("^") != std::string::npos)
+    string power = 1;
+    if(term.find("^") != string::npos)
         power = term.substr(term.find("^"), term.length() - 1);
     result.power = std::stof(power);
     // TODO add const maybe?
 
-    if (term.find("sin(x)") != std::string::npos) {
+    if (term.find("sin(x)") != string::npos) {
         result.term_type = FUNCTION::fsin;
-    } else if(term.find("cos(x)") != std::string::npos) {
+    } else if(term.find("cos(x)") != string::npos) {
         result.term_type = FUNCTION::fcos;
-    } else if(term.find("x") != std::string::npos) {
+    } else if(term.find("x") != string::npos) {
         result.term_type = FUNCTION::fx;
     } else {
         // TODO terminate

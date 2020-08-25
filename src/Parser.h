@@ -8,14 +8,16 @@
 #include <fstream>
 #include <vector>
 
+using std::string;
+using std::vector;
+
 class Parser {
 public:
-  // TODO implement multiple constr
   Parser(std::ifstream filestream);
-  Parser(std::string expr);
+  Parser(string expr);
   Expression generateExpression();
 private:
-  std::vector<TERM> terms_;
-  std::vector<char> oprs_;
-  TERM decompose_term(std::string term);
+  vector<TERM> terms_;
+  vector<char> oprs_;
+  TERM decompose_term(string term);
 };

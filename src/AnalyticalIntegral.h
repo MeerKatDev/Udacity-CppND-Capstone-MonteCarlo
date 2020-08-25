@@ -1,3 +1,6 @@
+#ifndef ANALYTICAL_INTEGRAL_H
+#define ANALYTICAL_INTEGRAL_H
+
 #include "Integral.h"
 #include <string>
 
@@ -9,5 +12,7 @@ public:
     AnalyticalIntegral(Expression expr);
     string calculate();
 private:
-    float calculateSingleTerm(TERM* term);
+    string calculateSingleTerm(TERM* term);
 };
+
+#endif

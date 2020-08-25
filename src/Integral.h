@@ -1,14 +1,11 @@
-/* 
-  constructor takes the expression.
-  decides whether it will be an analytical or numerical calculation
+#ifndef INTEGRAL_H
+#define INTEGRAL_H
 
-*/
 #include "Expression.h"
 
 template<typename T>
 class Integral {
 public:
-  Integral(Expression expr);
   virtual T calculate() = 0;
 
 private:
@@ -17,3 +14,5 @@ private:
 protected:
   Expression expression;
 };
+
+#endif

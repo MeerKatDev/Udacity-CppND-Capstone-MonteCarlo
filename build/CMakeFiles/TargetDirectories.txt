@@ -1,0 +1,3 @@
+/Users/pro/Udacity/CppND-Capstone-Hello-World/build/CMakeFiles/rebuild_cache.dir
+/Users/pro/Udacity/CppND-Capstone-Hello-World/build/CMakeFiles/edit_cache.dir
+/Users/pro/Udacity/CppND-Capstone-Hello-World/build/CMakeFiles/integrate.dir

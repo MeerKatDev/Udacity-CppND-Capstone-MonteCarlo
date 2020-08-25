@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     if (argc < 2) {
         // Tell the user how to run the program
         // TODO
-        std::cerr << "Usage: " << argv[0] << " -pthread\n";
+        std::cerr << "Usage: " << argv[0] << "\n";
         return 1;
     }
     
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
             if (i + 1 < argc) { 
                 p = new Parser(argv[i++]);
             } else { 
-                std::cerr << "--expr option requires one argument.\n";
+                std::cerr << "--expr option requires one string.\n";
                 return 1;
             }  
         } else if(arg == "--filepath") {
@@ -52,21 +52,25 @@ int main(int argc, char *argv[]) {
                 std::ifstream filestream(argv[i++]);
                 p = new Parser(std::move(filestream));
             } else { 
-                std::cerr << "--filepath option requires one argument.\n";
+                std::cerr << "--filepath option requires one string.\n";
                 return 1;
             }  
         } else if(arg == "--upper") {
             boundaryFound = true;
             if (i + 1 < argc) { 
-                
-                p = new Parser(std::move(filestream));
+                upper = std::stof(argv[i++]);
             } else { 
-                std::cerr << "--filepath option requires one argument.\n";
+                std::cerr << "--upper option requires one float number.\n";
                 return 1;
             }  
         } else if(arg == "--lower") {
             boundaryFound = true;
-
+            if (i + 1 < argc) { 
+                lower = std::stof(argv[i++]);
+            } else { 
+                std::cerr << "--lower option requires one float number.\n";
+                return 1;
+            }  
         } else {
             std::cerr << "Something went wrong.\n";
             return 1;
