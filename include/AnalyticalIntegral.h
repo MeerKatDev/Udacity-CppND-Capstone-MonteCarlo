@@ -7,9 +7,9 @@
 using std::string;
 using std::to_string;
 
-class AnalyticalIntegral : public Integral {
+class AnalyticalIntegral : public Integral<string> {
 public:
-    AnalyticalIntegral(Expression expr);
+    AnalyticalIntegral(Expression expr): Integral(expr) {};
     string calculate();
 private:
     string calculateSingleTerm(TERM* term);

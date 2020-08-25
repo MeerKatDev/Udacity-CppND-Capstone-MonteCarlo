@@ -36,13 +36,13 @@ From the [rubric](https://review.udacity.com/#!/rubrics/2533/view), apart from t
  - The project accepts user input and processes the input.
 
 ### Object Oriented Programming
- - The project uses Object Oriented Programming techniques.
- - Classes use appropriate access specifiers for class members.
- - Classes encapsulate behavior.
- - Templates generalize functions in the project.
+ - The project uses Object Oriented Programming techniques (All classes).
+ - Classes use appropriate access specifiers for class members (All classes).
+ - Classes encapsulate behavior (All classes).
+ - Templates generalize functions in the project (Integral.h).
 
  ### Memory Management
- - None
+ - The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate.
  ### Concurrency
  - None
 

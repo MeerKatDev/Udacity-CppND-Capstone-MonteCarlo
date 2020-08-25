@@ -3,15 +3,6 @@
 #include "NumericalIntegral.h"
 #include "AnalyticalIntegral.h"
 
-/*
-    Class integral
-     - NumericalIntegral
-     - AnalyticalIntegral
-    Class Parser
-    Class 
-
-*/
-
 using std::string;
 
 // SRC: https://stackoverflow.com/q/4654636/1096030
