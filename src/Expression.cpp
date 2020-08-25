@@ -1,9 +1,12 @@
 #include "Expression.h"
 #include <vector>
 
-Expression::Expression(int[] array) {
+Expression::Expression(TERM[] array) {
     std::vector<TERM> internal;
-    terms_ = std::make_unique<int[]>(array);
+    terms_ = std::make_unique<TERM[]>(array);
+}
+
+Expression::Expression(TERM[] terms, char[] oprs) {
 
 }
 

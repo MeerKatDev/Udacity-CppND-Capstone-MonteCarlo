@@ -6,8 +6,6 @@ struct TERM {
   float coeff;
   FUNCTION term_type;
   float power;
-  // TODO (BONUS) allow subexpressions
-  //std::vector<TERM> internal;
 };
 
 class Expression {
@@ -19,5 +17,5 @@ public:
 
 private:
   unsigned int numberOfTerms_;
-  std::unique_ptr<int[]> terms_;
+  std::unique_ptr<TERM[]> terms_;
 };

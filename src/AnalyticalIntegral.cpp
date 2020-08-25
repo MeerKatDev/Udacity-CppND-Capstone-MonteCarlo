@@ -1,13 +1,8 @@
 #include "AnalyticalIntegral.h"
 
-
-using std::string;
-using std::to_string;
-
 AnalyticalIntegral::AnalyticalIntegral(Expression expr) {
     expression = expr;
 }
-
 
 string AnalyticalIntegral::calculate() {
     char[] oprs = expression.getOperators();

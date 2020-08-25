@@ -16,5 +16,4 @@ private:
 
 protected:
   Expression expression;
-
 };
