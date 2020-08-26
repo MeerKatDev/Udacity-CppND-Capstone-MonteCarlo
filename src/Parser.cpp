@@ -44,6 +44,7 @@ std::pair<vector<TERM>*, vector<char>*> Parser::getExpression() {
 
 TERM Parser::decomposeTerm(string term) {
     TERM result;
+    std::cout << "decomposing: " << term << "\n";
     result.coeff = std::stof(term); // will stop at the first char
     string power = "1";
     if(term.find("^") != string::npos)

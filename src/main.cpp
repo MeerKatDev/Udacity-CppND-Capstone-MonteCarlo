@@ -18,29 +18,31 @@ int main(int argc, char *argv[]) {
     string arg;
     bool boundaryFound = false;
     float upper = 0, lower = 0; // optional limits
-    Parser* p;
+    Parser* p = nullptr;
     std::cout << "Hello Udacity!" << "\n";
     
     // Check the number of parameters
     if (argc < 2) {
         // Tell the user how to run the program
         // TODO
-        std::cerr << "Usage: " << argv[0] << "\n";
+        std::cerr << "Usage: \n";
+        std::cerr << "integrate --expr \"6x^2 + 7x^3 .\"\n";
+        std::cerr << "integrate --filepath input.txt\n";
         return 1;
     }
     
-    for (unsigned int i = 1; i < argc; ++i) {
+    for (unsigned int i = 1; i < argc; i++) {
         arg = string(argv[i]);
         if (arg == "--expr") {
             if (i + 1 < argc) { 
-                p = new Parser(argv[i++]);
+                p = new Parser(argv[++i]);
             } else { 
                 std::cerr << "--expr option requires one string.\n";
                 return 1;
             }  
         } else if(arg == "--filepath") {
             if (i + 1 < argc) { 
-                std::ifstream filestream(argv[i++]);
+                std::ifstream filestream(argv[++i]);
                 p = new Parser(std::move(filestream));
             } else { 
                 std::cerr << "--filepath option requires one string.\n";
@@ -48,20 +50,30 @@ int main(int argc, char *argv[]) {
             }  
         } else if(arg == "--upper") {
             boundaryFound = true;
-            if (i + 1 < argc) { 
-                upper = std::stof(argv[i++]);
-            } else { 
-                std::cerr << "--upper option requires one float number.\n";
+            if(p != nullptr) {
+                if (i + 1 < argc) { 
+                    upper = std::stof(argv[i++]);
+                } else { 
+                    std::cerr << "--upper option requires one float number.\n";
+                    return 1;
+                }  
+            } else {
+                std::cerr << "Either one of '--expr' or '--filepath' is required.\n";
                 return 1;
-            }  
+            }
         } else if(arg == "--lower") {
             boundaryFound = true;
-            if (i + 1 < argc) { 
-                lower = std::stof(argv[i++]);
-            } else { 
-                std::cerr << "--lower option requires one float number.\n";
+            if(p != nullptr) {
+                if (i + 1 < argc) { 
+                    lower = std::stof(argv[i++]);
+                } else { 
+                    std::cerr << "--lower option requires one float number.\n";
+                    return 1;
+                }  
+            } else {
+                std::cerr << "Either one of '--expr' or '--filepath' is required.\n";
                 return 1;
-            }  
+            }
         } else {
             std::cerr << "Something went wrong.\n";
             return 1;
