@@ -44,14 +44,12 @@ std::pair<vector<TERM>*, vector<char>*> Parser::getExpression() {
 
 TERM Parser::decomposeTerm(string term) {
     TERM result;
-    std::cout << "decomposing: " << term << "\n";
     result.coeff = std::stof(term); // will stop at the first char
     string power = "1";
     if(term.find("^") != string::npos)
-        power = term.substr(term.find("^"), term.length() - 1);
+        power = term.substr(term.find("^") + 1, term.length() - 1);
     result.power = std::stof(power);
-    // TODO add const maybe?
-
+    // TODO add fconst maybe?
     if (term.find("sin(x)") != string::npos) {
         result.term_type = FUNCTION::fsin;
     } else if(term.find("cos(x)") != string::npos) {
@@ -60,7 +58,7 @@ TERM Parser::decomposeTerm(string term) {
         result.term_type = FUNCTION::fx;
     } else {
         // TODO terminate
-        std::cerr << "Cannot parse, a function is not supported\n";
+        std::cerr << "Cannot parse, one of these functions is not supported (only x, sin(x), and cos(x))\n";
     }
 
     return result;

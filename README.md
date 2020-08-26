@@ -1,26 +1,24 @@
 # Integral calculator
 
-This project was done to make Udacity guys happi, like good bois.
-
 Disclaimer: this doesn't calculate integrals correctly. 
 While it works normally for polynomials, for simplicity the rule is: 
  - `\int \sin(x)^y = \sin(x)^{y+1}/(y+1) \dot (-\cos(x))`
  - `\int \cos(x)^y = \cos(x)^{y+1}/(y+1) \dot (\sin(x))`
+since the algorithm to calculate them properly would be too complex.
 
 ## Class structure
-src:
  - Integral
    - AnalyticalIntegral (subclass)
    - NumericalIntegral (subclass)
- - Expression
  - Parser
+ - main.cpp (not a class)
 
 ## Expected behaviour / output
 The program calculates some "simplified" integrals. Due to the simplicity of the project, there are several restrictions to it:
  - It takes only three types of functions: `x` (linear), `sin(x)`, and `cos(x)` (trigonometrical)
  - it parses only a very precise format, for example:
    `6x^2 + 8.2sin(x)^3 + 4cos(x)^3.2 .`
-   - it accepts integers or floats
+   - it accepts (positive) integers or floats
    - it has to end with a dot (`.`)
  - if it gets one boundary, it assumes the other as zero
  - if it gets any boundary, it will assume a definite integral and it will calculate it numerically
@@ -32,8 +30,8 @@ From the [rubric](https://review.udacity.com/#!/rubrics/2533/view), apart from t
 
 ### Loops, Functions, I/O
  - The project demonstrates an understanding of C++ functions and control structures.
- - The project reads data from a file and process the data, or the program writes data to a file.
- - The project accepts user input and processes the input.
+ - The project reads data from a file and process the data, or the program writes data to a file (main.cpp + Parser).
+ - The project accepts user input and processes the input (main.cpp + Parser).
 
 ### Object Oriented Programming
  - The project uses Object Oriented Programming techniques (All classes).
@@ -42,7 +40,8 @@ From the [rubric](https://review.udacity.com/#!/rubrics/2533/view), apart from t
  - Templates generalize functions in the project (Integral.h).
 
  ### Memory Management
- - The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate.
+ - The project makes use of references in function declarations (Integral constructor(s)).
+
  ### Concurrency
  - None
 

@@ -22,12 +22,15 @@ int main(int argc, char *argv[]) {
     std::cout << "Hello Udacity!" << "\n";
     
     // Check the number of parameters
-    if (argc < 2) {
+    arg = string(argv[1]);
+    if (argc < 2 || (arg == "--help") || (arg == "-h")) {
         // Tell the user how to run the program
         // TODO
         std::cerr << "Usage: \n";
         std::cerr << "integrate --expr \"6x^2 + 7x^3 .\"\n";
-        std::cerr << "integrate --filepath input.txt\n";
+        std::cerr << "integrate --filepath input.txt, where input.txt contains an expression.\n";
+        std::cerr << "Expressions must end with a dot.\n";
+        std::cerr << "Coefficients must be positive.\n";
         return 1;
     }
     
@@ -52,7 +55,7 @@ int main(int argc, char *argv[]) {
             boundaryFound = true;
             if(p != nullptr) {
                 if (i + 1 < argc) { 
-                    upper = std::stof(argv[i++]);
+                    upper = std::stof(argv[++i]);
                 } else { 
                     std::cerr << "--upper option requires one float number.\n";
                     return 1;
@@ -65,7 +68,8 @@ int main(int argc, char *argv[]) {
             boundaryFound = true;
             if(p != nullptr) {
                 if (i + 1 < argc) { 
-                    lower = std::stof(argv[i++]);
+                    lower = std::stof(argv[++i]);
+                    std::cout << argv[i] << "\n";
                 } else { 
                     std::cerr << "--lower option requires one float number.\n";
                     return 1;
@@ -93,8 +97,10 @@ int main(int argc, char *argv[]) {
         AnalyticalIntegral ai(*(expr.first), *(expr.second));
         result = ai.calculate();
     }
-
+    
     std::cout << "The result of the integral is: " << result << "\n.";
-    delete p;   
+    
+    delete p;
+
     return 0;
 }
